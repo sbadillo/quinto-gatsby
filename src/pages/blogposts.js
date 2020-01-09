@@ -24,6 +24,7 @@ const BlogPosts = ({ data }) => {
 
 export default BlogPosts
 
+// export query that provides the data to populate the above BlogPosts component
 export const query = graphql`
   query BlogPostsPageQuery {
     allContentfulBlogPost(limit: 1000) {
