@@ -1,8 +1,26 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const contentfulConfig = {
+  spaceId: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  // host: process.env.CONTENTFUL_HOST
+}
+
+const { spaceId, accessToken } = contentfulConfig
+
+if (!spaceId || !accessToken) {
+  throw new Error(
+    "Contentful spaceId and the access token need to be provided."
+  )
+}
+
 module.exports = {
   siteMetadata: {
     title: `sbad.io`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    author: `sbad`,
   },
   plugins: [
     `gatsby-plugin-styled-components`,
@@ -33,11 +51,7 @@ module.exports = {
     // `gatsby-plugin-offline`,
     {
       resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: `755v0zze6zwp`,
-        // Learn about environment variables: https://gatsby.dev/env-vars
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      },
+      options: contentfulConfig,
     },
   ],
 }
